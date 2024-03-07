@@ -31,7 +31,7 @@ def bin2dec(string_num):
 
 def dec2vec(dec,n):
     vec=np.zeros((2**n,1))
-    vec[dec,0]=1;
+    vec[int(dec),0]=1;
     return vec
     
 def psi(string_num):

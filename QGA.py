@@ -39,7 +39,7 @@ probability = np.empty([popSize])
 qpv = np.empty([popSize, genomeLength, top_bottom])         
 nqpv = np.empty([popSize, genomeLength, top_bottom])
 # chromosome: classical chromosome
-chromosome = np.empty([popSize, genomeLength],dtype=np.int) 
+chromosome = np.empty([popSize, genomeLength],dtype=np.intc) 
 child1 = np.empty([popSize, genomeLength, top_bottom])
 child2 = np.empty([popSize, genomeLength, top_bottom])
 best_chrom = np.empty([generation_max])
@@ -176,9 +176,9 @@ def rotation():
     # Lookup table of the rotation angle
     for i in range(1,popSize):
        for j in range(1,genomeLength):
-           if fitness[i]<fitness[best_chrom[generation]]:
-             # if chromosome[i,j]==0 and chromosome[best_chrom[generation],j]==0:
-               if chromosome[i,j]==0 and chromosome[best_chrom[generation],j]==1:
+           if fitness[i]<fitness[int(best_chrom[generation])]:
+             # if chromosome[i,j]==0 and chromosome[int(best_chrom[generation]),j]==0:
+               if chromosome[i,j]==0 and chromosome[int(best_chrom[generation]),j]==1:
                    # Define the rotation angle: delta_theta (e.g. 0.0785398163)
                    delta_theta=0.0785398163
                    rot[0,0]=math.cos(delta_theta); rot[0,1]=-math.sin(delta_theta);
@@ -187,7 +187,7 @@ def rotation():
                    nqpv[i,j,1]=(rot[1,0]*qpv[i,j,0])+(rot[1,1]*qpv[i,j,1])
                    qpv[i,j,0]=round(nqpv[i,j,0],2)
                    qpv[i,j,1]=round(1-nqpv[i,j,0],2)
-               if chromosome[i,j]==1 and chromosome[best_chrom[generation],j]==0:
+               if chromosome[i,j]==1 and chromosome[int(best_chrom[generation]),j]==0:
                    # Define the rotation angle: delta_theta (e.g. -0.0785398163)
                    delta_theta=-0.0785398163
                    rot[0,0]=math.cos(delta_theta); rot[0,1]=-math.sin(delta_theta);
@@ -196,7 +196,7 @@ def rotation():
                    nqpv[i,j,1]=(rot[1,0]*qpv[i,j,0])+(rot[1,1]*qpv[i,j,1])
                    qpv[i,j,0]=round(nqpv[i,j,0],2)
                    qpv[i,j,1]=round(1-nqpv[i,j,0],2)
-             # if chromosome[i,j]==1 and chromosome[best_chrom[generation],j]==1:
+             # if chromosome[i,j]==1 and chromosome[int(best_chrom[generation]),j]==1:
 
 #########################################################
 # X-PAULI QUANTUM MUTATION GATE                         #
